@@ -1,3 +1,4 @@
+day11: day11.c
 day10: day10.c
 day9: day9.c
 day8: day8.c
