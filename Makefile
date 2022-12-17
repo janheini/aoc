@@ -1,11 +1,10 @@
-day11: day11.c
-day10: day10.c
-day9: day9.c
-day8: day8.c
-day7: day7.c
-day6: day6.c
-day5: day5.c
-day4: day4.c
-day3: day3.c
-day2: day2.c
-day1: day1.c
+SOURCES:=$(shell echo *.c)
+BINARIES:=$(shell echo $(SOURCES) | tr -d '.c')
+CFLAGS=-O2 -march=native
+
+all: $(BINARIES)
+
+day%: day%.c
+
+clean:
+	rm -f $(BINARIES)
