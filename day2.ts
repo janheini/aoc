@@ -16,17 +16,17 @@ for (const line of input) {
   while (l.length > 0) {
     switch (l.pop()) {
       case "red":
-        let red = Number(l.pop())
+        let red = Number(l.pop());
         if (red > 12) legal = false;
         if (red > max_cubes.red) max_cubes.red = red;
         break;
       case "green":
-        let green = Number(l.pop())
+        let green = Number(l.pop());
         if (green > 13) legal = false;
         if (green > max_cubes.green) max_cubes.green = green;
         break;
       case "blue":
-        let blue = Number(l.pop())
+        let blue = Number(l.pop());
         if (blue > 14) legal = false;
         if (blue > max_cubes.blue) max_cubes.blue = blue;
         break;
