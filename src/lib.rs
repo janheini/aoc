@@ -1,6 +1,6 @@
 #![warn(rust_2018_idioms)]
 
-use std::fs;
+use std::{fs, usize};
 pub mod day1;
 
 pub enum Part {
@@ -21,7 +21,7 @@ pub fn read_input(day: u8) -> String {
     return fs::read_to_string(format!("input/day{day}.txt")).expect("should have input");
 }
 
-pub fn read_solution(day: u8, part: &Part) -> Option<i32> {
+pub fn read_solution(day: u8, part: &Part) -> Option<usize> {
     let solution = match fs::read_to_string(format!("solutions/day{day}.txt")) {
         Ok(solution) => solution,
         Err(err) => {
