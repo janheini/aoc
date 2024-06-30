@@ -48,7 +48,7 @@ impl<'a> Part2<'a> {
             &self.line[..self.back]
         };
 
-        for (value, pair) in NUMBERS.into_iter().enumerate() {
+        for (value, pair) in NUMBERS.iter().enumerate() {
             for item in pair {
                 let position = if forward {
                     substr.find(item)
@@ -119,7 +119,7 @@ pub fn part1() -> usize {
         println!("{line} -> {collect:?}, ({first}, {last}), {number:?}, {result}");
     }
 
-    return result;
+    result
 }
 
 pub fn part2() -> usize {
@@ -139,7 +139,7 @@ pub fn part2() -> usize {
             }
         }
     }
-    return result;
+    result
 }
 
 #[cfg(test)]
@@ -150,7 +150,7 @@ mod tests {
 
     #[test]
     fn test_iter() {
-        let t = |s: &str| Part2::new(s).into_iter().collect::<Vec<usize>>();
+        let t = |s: &str| Part2::new(s).collect::<Vec<usize>>();
 
         assert_eq!(t(""), vec![]);
         assert_eq!(t("4"), vec![4]);
@@ -166,7 +166,7 @@ mod tests {
 
     #[test]
     fn test_iter_back() {
-        let t = |s: &str| Part2::new(s).into_iter().rev().collect::<Vec<usize>>();
+        let t = |s: &str| Part2::new(s).rev().collect::<Vec<usize>>();
 
         assert_eq!(t(""), vec![]);
         assert_eq!(t("4"), vec![4]);
@@ -182,7 +182,7 @@ mod tests {
 
     #[test]
     fn test_iter_both() {
-        let mut test = Part2::new("onetwothree").into_iter();
+        let mut test = Part2::new("onetwothree");
 
         assert_eq!(test.next(), Some(1));
         assert_eq!(test.next_back(), Some(3));

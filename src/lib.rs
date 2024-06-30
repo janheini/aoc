@@ -1,6 +1,6 @@
 #![warn(rust_2018_idioms)]
 
-use std::{fs, usize};
+use std::fs;
 pub mod day1;
 
 pub enum Part {
@@ -18,7 +18,7 @@ impl std::fmt::Display for Part {
 }
 
 pub fn read_input(day: u8) -> String {
-    return fs::read_to_string(format!("input/day{day}.txt")).expect("should have input");
+    fs::read_to_string(format!("input/day{day}.txt")).expect("should have input")
 }
 
 pub fn read_solution(day: u8, part: &Part) -> Option<usize> {
@@ -33,8 +33,8 @@ pub fn read_solution(day: u8, part: &Part) -> Option<usize> {
     let mut lines = solution.lines();
 
     match part {
-        Part::One => return lines.nth(0).unwrap_or_default().parse().ok(),
-        Part::Two => return lines.nth(1).unwrap_or_default().parse().ok(),
+        Part::One => lines.next().unwrap_or_default().parse().ok(),
+        Part::Two => lines.nth(1).unwrap_or_default().parse().ok(),
     }
 }
 
