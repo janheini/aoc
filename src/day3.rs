@@ -28,7 +28,7 @@ pub fn part1(input: &str) -> u32 {
     }
 
     for (x, row) in grid.iter().enumerate() {
-        let mut value: u32 = 0;
+        let mut value = 0;
         let mut valid = false;
 
         for (y, c) in row.iter().enumerate() {
@@ -81,13 +81,6 @@ mod tests {
     }
 
     #[test]
-    fn day3_part1() {
-        let result = part1(&read_input(3));
-        println!("Result Day3 Part1: {}", result);
-        assert_eq!(result, 521601);
-    }
-
-    #[test]
     fn day3_into_iter() {
         let mut foo = [Some(1), Some(2), None, Some(4)]
             .iter()
@@ -96,5 +89,16 @@ mod tests {
         assert_eq!(foo.next(), Some(&1));
         assert_eq!(foo.next(), Some(&2));
         assert_eq!(foo.next(), Some(&4));
+    }
+
+    #[test]
+    fn day3_part1() {
+        let day = 3;
+        let part = Part::One;
+        let input = read_input(day);
+
+        if let Some(solution) = read_solution(day, &part) {
+            assert_eq!(part1(&input), solution, "day{day} part{part}");
+        }
     }
 }

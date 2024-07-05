@@ -18,7 +18,7 @@ impl<'a> Part2<'a> {
     }
 
     /// used by Iterator and DoubleEndedIterator
-    fn next_number(&mut self, forward: bool) -> Option<usize> {
+    fn next_number(&mut self, forward: bool) -> Option<u32> {
         if self.front >= self.back {
             /* This is for the correct semantics of DoubleEndedIterator:
              * "It is important to note that both back and forth work on the same range, and do not
@@ -39,7 +39,7 @@ impl<'a> Part2<'a> {
         ];
 
         let mut first_pos: Option<usize> = None;
-        let mut first_val: Option<usize> = None;
+        let mut first_val: Option<u32> = None;
         let mut first_match: Option<&str> = None;
 
         let substr = if forward {
@@ -57,6 +57,8 @@ impl<'a> Part2<'a> {
                 };
 
                 if let Some(position) = position {
+                    let value: u32 = value.try_into().unwrap();
+
                     match first_pos {
                         Some(pos) => {
                             if (forward && position < pos) || (!forward && position > pos) {
@@ -90,7 +92,7 @@ impl<'a> Part2<'a> {
 }
 
 impl<'a> Iterator for Part2<'a> {
-    type Item = usize;
+    type Item = u32;
 
     fn next(&mut self) -> Option<Self::Item> {
         self.next_number(true)
@@ -103,7 +105,7 @@ impl<'a> DoubleEndedIterator for Part2<'a> {
     }
 }
 
-pub fn part1() -> usize {
+pub fn part1() -> u32 {
     let input = read_input(1);
     let mut result = 0;
 
@@ -113,7 +115,7 @@ pub fn part1() -> usize {
         let collect = numbers_in_line.map(|x| x.1).collect::<Vec<_>>();
         let first = collect.first().unwrap();
         let last = collect.last().unwrap();
-        let number: usize = format!("{}{}", first, last).parse().unwrap();
+        let number: u32 = format!("{}{}", first, last).parse().unwrap();
 
         result += number;
         println!("{line} -> {collect:?}, ({first}, {last}), {number:?}, {result}");
@@ -122,9 +124,9 @@ pub fn part1() -> usize {
     result
 }
 
-pub fn part2() -> usize {
+pub fn part2() -> u32 {
     let input = read_input(1);
-    let mut result: usize = 0;
+    let mut result = 0;
 
     for line in input.lines() {
         let mut iter = Part2::new(line);
@@ -144,13 +146,12 @@ pub fn part2() -> usize {
 
 #[cfg(test)]
 mod tests {
+    use super::super::*;
     use super::*;
-    use crate::read_solution;
-    use crate::Part;
 
     #[test]
-    fn test_iter() {
-        let t = |s: &str| Part2::new(s).collect::<Vec<usize>>();
+    fn day1_iter() {
+        let t = |s: &str| Part2::new(s).collect::<Vec<_>>();
 
         assert_eq!(t(""), vec![]);
         assert_eq!(t("4"), vec![4]);
@@ -165,8 +166,8 @@ mod tests {
     }
 
     #[test]
-    fn test_iter_back() {
-        let t = |s: &str| Part2::new(s).rev().collect::<Vec<usize>>();
+    fn day1_iter_back() {
+        let t = |s: &str| Part2::new(s).rev().collect::<Vec<_>>();
 
         assert_eq!(t(""), vec![]);
         assert_eq!(t("4"), vec![4]);
@@ -181,7 +182,7 @@ mod tests {
     }
 
     #[test]
-    fn test_iter_both() {
+    fn day1_iter_both() {
         let mut test = Part2::new("onetwothree");
 
         assert_eq!(test.next(), Some(1));
@@ -191,7 +192,7 @@ mod tests {
     }
 
     #[test]
-    fn test_part1() {
+    fn day1_part1() {
         let day = 1;
         let part = Part::One;
 
@@ -201,7 +202,7 @@ mod tests {
     }
 
     #[test]
-    fn test_part2() {
+    fn day1_part2() {
         let day = 1;
         let part = Part::Two;
 

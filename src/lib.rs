@@ -23,7 +23,7 @@ pub fn read_input(day: u8) -> String {
     fs::read_to_string(format!("input/day{day}.txt")).expect("should have input")
 }
 
-pub fn read_solution(day: u8, part: &Part) -> Option<usize> {
+pub fn read_solution(day: u8, part: &Part) -> Option<u32> {
     let solution = match fs::read_to_string(format!("solutions/day{day}.txt")) {
         Ok(solution) => solution,
         Err(err) => {
