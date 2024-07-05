@@ -3,6 +3,7 @@
 use std::fs;
 pub mod day1;
 pub mod day2;
+pub mod day3;
 
 pub enum Part {
     One = 1,
